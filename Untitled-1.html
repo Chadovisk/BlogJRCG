@@ -1,34 +1,351 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JRCG</title>
-    <link rel="stylesheet" href="cssdosite.css"> 
+    <title>JR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        .navbar {
+            background-color: #380a6b;
+            color: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+            padding: 0 1rem;
+            margin: 0 1rem;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo-text {
+            border: 2px solid white;
+            padding: 5px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-text::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid white;
+            z-index: -1;
+        }
+
+        .logo .bl-text {
+            font-size: 2.5rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin: 0 1.2rem;
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 5px 0;
+        }
+
+        .nav-menu li.active a {
+            font-weight: bold;
+        }
+
+        .nav-menu li.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+        }
+
+        .cabecalho {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .cabecalho h1 {
+            margin-top: 1rem;
+            color: #333;
+        }
+
+        .cabecalho-sub-titulo {
+            color: #555;
+        }
+
+        .foto-perfil {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .sobre-container {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .sobre-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .box-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .box-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid black;
+            box-sizing: border-box;
+            background-color: transparent;
+            z-index: 1;
+        }
+
+        .box-front {
+            position: relative;
+            top: 8px;
+            left: 8px;
+            width: calc(100% - 16px);
+            min-height: 100px;
+            border: 2px solid black;
+            box-sizing: border-box;
+            background-color: #a0d8c0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: black;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .box-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: calc(100% - 16px);
+            height: 2px;
+            background-color: black;
+            z-index: 2;
+        }
+
+        .box-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -10px;
+            width: 2px;
+            height: calc(100% - 16px);
+            background-color: black;
+            z-index: 2;
+        }
+
+
+        .contact-section {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contact-box-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+
+        .contact-box-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid black;
+            box-sizing: border-box;
+            background-color: transparent;
+            z-index: 1;
+        }
+
+        .contact-box-front {
+            position: relative;
+            top: 8px;
+            left: 8px;
+            width: calc(100% - 16px);
+            min-height: 100px;
+            border: 2px solid black;
+            box-sizing: border-box;
+            background-color: #a0d8c0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: black;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .contact-box-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: calc(100% - 16px);
+            height: 2px;
+            background-color: black;
+            z-index: 2;
+        }
+
+        .contact-box-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -10px;
+            width: 2px;
+            height: calc(100% - 16px);
+            background-color: black;
+            z-index: 2;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            font-size: 1em;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-button {
+            background-color: #380a6b;
+            color: #fff;
+            padding: 15px 25px;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-button:hover {
+            background-color: #331f4b;
+        }
+    </style>
 </head>
+
 <body>
+
     <header class="navbar">
         <div class="navbar-content">
             <ul class="nav-menu">
-    <li><a href="#Início">Início</a></li>
-    <li class="active"><a href="#Sobre">Sobre</a></li>
+                <li><a href="#">Início</a></li>
+                <li class="active"><a href="#">Sobre</a></li>
             </ul>
+
             <div class="logo">
                 <div class="logo-text">
                     <span class="bl-text">J<br>R</span>
                 </div>
             </div>
+
             <ul class="nav-menu">
-                <li><a href="https://www.instagram.com/r_chada0/" target="_blank">Instagram</a></li>
-                <li><a href="https://wa.me/5591984936552" target="_blank">Whatsapp</a></li>
+                <li><a href="#">Portfólio</a></li>
+                <li><a href="https://api.whatsapp.com/send/?phone=5591984936552&text&type=phone_number&app_absent=0"
+                        target="_blank">Whatsapp</a></li>
             </ul>
         </div>
     </header>
+
     <main id="Início" class="cabecalho">
         <img src="test1.png" alt="Img Perfil" class="foto-perfil">
+
         <h1>José Ricardo</h1>
         <p class="cabecalho-sub-titulo">Programador Junior</p>
     </main>
+
     <section id="Sobre" class="sobre-container">
         <h2>Sobre Mim</h2>
         <div class="box-container">
@@ -41,34 +358,25 @@
                     e resilientes.</p>
             </div>
         </div>
-        <h2>Experiências</h2>
-        <div class="box-container">
-            <div class="box-back"></div>
-            <div class="box-front">
-                <p>
-                    Estou no segundo semestre de <strong>Ciência da Computação</strong>, construindo uma base teórica
-                    sólida. Essa formação é complementada por <strong>cursos livres e não profissionalizantes</strong>,
-                    que demonstram minha iniciativa em buscar conhecimento prático.
-                    <br><br> Minha experiência anterior na <strong>LAN House QG X1</strong> desenvolveu em mim aptidões
-                    valiosas em <strong>suporte técnico</strong>, <strong>resolução rápida de problemas
-                        (troubleshooting)</strong> e <strong>gestão de sistemas</strong>. Atualmente, busco
-                    oportunidades para aprofundar meus conhecimentos práticos em <strong>desenvolvimento
-                        (Front-End/Back-End) ou Cibersegurança</strong>, alinhando minha dedicação com as necessidades
-                    do mercado de TI.
-                </p>
-            </div>
     </section>
-   <section id="Contatos" class="contact-section">
-    <h2>Entre em Contato</h2>
-    <div class="contact-form">
-        <input type="text" placeholder="Nome" class="campo-form">
-        <textarea placeholder="Digite sua mensagem" class="text-form"></textarea>
-        <a href="https://api.whatsapp.com/send/?phone=5591984936552&text&type=phone_number&app_absent=0"
-            class="contact-button" target="_blank">
-            Enviar Whatsapp
-        </a>
-    </div>
-</section>
+
+    <section id="Contatos" class="contact-section">
+        <h2>Entre em Contato</h2>
+        <div class="contact-box-container">
+            <div class="contact-box-back"></div>
+            <div class="contact-box-front">
+                <form class="contact-form" id="formulario">
+                    <input type="text" placeholder="Nome" class="campo-form">
+                    <textarea class="text-form" placeholder="Digite sua mensagem"></textarea>
+                    <a href="https://api.whatsapp.com/send/?phone=5591984936552&text&type=phone_number&app_absent=0"
+                        class="contact-button" target="_blank">
+                        Enviar Whatsapp
+                    </a>
+                </form>
+            </div>
+        </div>
+    </section>
+
 </body>
 
 </html>
